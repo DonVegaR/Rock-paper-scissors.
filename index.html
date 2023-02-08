@@ -4,7 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function getComputerChoice() {
+         let game = ['Rock', 'Paper', 'Scissors']   
+         let word = Math.floor(Math.random()*game.length)
+         console.log(game[word])
+        }
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection === computerSelection) {
+            return ("It's a draw!");
+            } else if ((playerSelection === "Rock") && (computerSelection === "Scissors")) {
+                return ("You win! Rock beats scissors");
+            } else if (playerSelection === "Rock" && computerSelection === "Paper") {
+                return ("You lose! Paper beats rock");
+            } else if (playerSelection === "Paper" && computerSelection === "Rock") {
+                return ("You win! Paper beats rock");
+            } else if (playerSelection === "Paper" && computerSelection === "scissors") {
+                return ("You lose! Scissors beat paper");
+            } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+                return ("You win! Scissors beat paper");
+            } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+                return ("You lose! Rock beats scissors");
+            }
+        }
 
+        let computerSelection = getComputerChoice()
+        let playerSelection = 'Rock'
+        console.log(computerSelection)
+        console.log(playRound(playerSelection, computerSelection))
+
+    </script>
     <title>Rock-paper-scissors.</title>
 </head>
 <body>
