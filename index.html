@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Rock-paper-scissors.</title>
+</head>
+<body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+    <p id="result"></p>
     <script>
+
         //function to get the computer choice
         function getComputerSelection() {
          let rockPaperScissors = [
@@ -15,10 +25,12 @@
          let randomNumber = Math.floor(Math.random()*rockPaperScissors.length)
          return rockPaperScissors[randomNumber]
         }
-        //players choice
-        function playRound(playerSelection, computerSelection) {
+
+        //function to play a game of rock, paper, scissors.
+        function playRound(playerSelection) {
+            const computerSelection = getComputerSelection()
             let result
-            if (playerSelection === computerSelection){
+            if (playerSelection === computerSelection){ //if player and computer are the same choice then it's a tie
                 result = "it's a tie!"
             } else if (
                 (playerSelection === 'rock' && computerSelection ==='paper') || 
@@ -29,55 +41,19 @@
             } else {
                 result = 'You win!'
             }
-            return result
-            
+            const resultElement = document.querySelector('#result')
+            resultElement.textContent = result 
         }
-        //main
-        function game() {
-            let player = 0
-            let computer = 0
-            let tie = 0
-            for (let i = 0; i < 5; i++){
-                const playerSelection = prompt
-                ('Choose rock, paper or scissors').toLocaleLowerCase() 
-                const computerSelection = getComputerSelection()
 
-                let result = playRound(playerSelection, computerSelection)
-                
-                if (result === 'You win!'){
-                    player++
-                    console.log('Player')
-                } else if (result === 'Computer Wins!'){
-                    computer++
-                    console.log('Computer')
-                } else if (result === "it's a tie!"){
-                    tie++
-                    console.log("Tie")
-                }
-            }
-            console.log('SCORE!')
-            console.log('player:', player)
-            console.log('computer:', computer)
-            console.log('tie:', tie)
+        const buttons = document.querySelectorAll('button')
 
-            if (player === computer){
-                console.log("IT'S A TIE")
-            } else if (player > computer){
-                console.log('PLAYER WINS!')
-            } else if (player < computer){
-                console.log('COMPUTER WINS!')
-            }
-            
-        }
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const playerSelection = button.id
+                playRound(playerSelection)
+            })
+        })
         
-        game()
-        
-        
-
     </script>
-    <title>Rock-paper-scissors.</title>
-</head>
-<body>
-    This is a test for a rock, paper and scissors game (press f12 to view on console)
 </body>
 </html>
