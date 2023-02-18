@@ -12,7 +12,13 @@
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
 
-    <p id="result"></p>
+    <div id="result"></div>
+
+    <div id="player"></div>
+    <div id="computer"></div>
+    <div id="tie"></div>
+
+
     <script>
 
         //function to get the computer choice
@@ -26,34 +32,55 @@
          return rockPaperScissors[randomNumber]
         }
 
+        let playerScore = 0
+        let computerScore = 0
+
         //function to play a game of rock, paper, scissors.
         function playRound(playerSelection) {
             const computerSelection = getComputerSelection()
             let result
+
             if (playerSelection === computerSelection){ //if player and computer are the same choice then it's a tie
                 result = "it's a tie!"
             } else if (
-                (playerSelection === 'rock' && computerSelection ==='paper') || 
+                (playerSelection === 'rock' && computerSelection ==='paper') ||
                 (playerSelection === 'paper' && computerSelection === 'scissors') ||
                 (playerSelection === 'scissors' && computerSelection == 'rock') 
             ) {
                 result = 'Computer Wins!'
+                computerScore++
             } else {
                 result = 'You win!'
+                playerScore++
             }
-            const resultElement = document.querySelector('#result')
-            resultElement.textContent = result 
+            const resultElement = document.querySelector('#result') //Selectin an element from the body with id as 'Result'
+            resultElement.textContent = result  //with .textContent editing the text inside the Div with id 'Result' to show the result of the playround
+
+            const playerScoreDisplay = document.querySelector('#player')
+            playerScoreDisplay.textContent = `Player Score: ${playerScore}`
+            const computerScoreDisplay = document.querySelector('#computer')
+            computerScoreDisplay.textContent = `Computer Score: ${computerScore}`
+
+            if (playerScore === 5){
+                alert('Congratulations! You won the game!')
+                playerScore = 0
+                computerScore = 0
+            } else if (computerScore === 5) { 
+                alert('Sorry, the computer won the game. better luck next time!')
+                playerScore = 0
+                computerScore = 0
+            }
         }
 
+        
         const buttons = document.querySelectorAll('button')
 
         buttons.forEach((button) => {
-            button.addEventListener('click', () => {
-                const playerSelection = button.id
-                playRound(playerSelection)
+        button.addEventListener('click', () => {
+            const playerSelection = button.id
+            playRound(playerSelection)
             })
         })
-        
     </script>
 </body>
 </html>
